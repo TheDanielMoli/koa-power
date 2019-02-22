@@ -1,0 +1,35 @@
+{
+  "name": "koa-power",
+  "version": "1.0.0",
+  "description": "Koa with superpowers! Effortless clustering, logging, response time & colors with Koa.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sadkit/koa-power.git"
+  },
+  "keywords": [
+    "koa",
+    "power",
+    "clustering",
+    "logging",
+    "cluster",
+    "log",
+    "response",
+    "time"
+  ],
+  "author": "Daniele Molinari",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Sadkit/koa-power/issues"
+  },
+  "homepage": "https://github.com/Sadkit/koa-power#readme",
+  "dependencies": {
+    "colors": "^1.3.3",
+    "human-names": "^1.0.11",
+    "koa": "^2.7.0",
+    "moment": "^2.24.0"
+  }
+}
