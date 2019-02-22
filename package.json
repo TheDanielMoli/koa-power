@@ -1,6 +1,6 @@
 {
   "name": "koa-power",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Koa with superpowers! Effortless clustering, logging, response time & colors with Koa.",
   "main": "index.js",
   "scripts": {

@@ -19,9 +19,9 @@ npm install --save koa-power
 
 ## Usage & Examples
 
-Minimal example:
+Minimal example - examples/minimal.js
 
-```ecmascript 6
+```javascript
 const Power = require('koa-power');
 const {log} = Power;
 
@@ -32,9 +32,9 @@ const main = app => {
 Power.load(main);
 ```
 
-Extended Example
+Extended Example - examples/extended.js
 
-```ecmascript 6
+```javascript
 const Power = require('koa-power');
 const {log} = Power;
 
