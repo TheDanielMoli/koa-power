@@ -7,3 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2019-02-22
 ### Initial Public Release
 - Effortless clustering, logging, response time & colors with Koa.
+
+## [1.1.0] - 2019-06-13
+### IPC
+- Allow sending custom messages from master to workers.
+
+## [1.2.0] - 2019-06-13
+### After Fork
+- Adding after fork callback option to load.

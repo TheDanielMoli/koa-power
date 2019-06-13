@@ -72,6 +72,7 @@ let load = (worker, options) => {
     !config.numWorkers && (config.numWorkers = 2);
     !config.mid && (config.mid = []);
     !config.enableLog && (config.enableLog = false);
+    !config.afterFork && (config.afterFork = () => {});
 
     let appDirectory = require('path').dirname(process.pkg ? process.execPath : (require.main ? require.main.filename : process.argv[0]));
     !config.logFileName && (config.logFileName = appDirectory + '/power.log');
@@ -105,9 +106,15 @@ let load = (worker, options) => {
         }
         log(out);
 
+        // fork new worker
+        const fork = () => {
+            cluster.fork();
+            config.afterFork();
+        };
+
         // forking workers
         log(`Forking ${numWorkers} worker` + (numWorkers !== 1 ? 's' : ''));
-        [...Array(numWorkers)].map(_ => cluster.fork());
+        [...Array(numWorkers)].map(() => fork());
 
         // wait for worker to be online and give it a name
         cluster.on('online', (worker) => {
@@ -122,7 +129,7 @@ let load = (worker, options) => {
         cluster.on('exit', (worker, exitCode) => {
             log(`Worker ${worker.process.id} exited with code ${exitCode}`);
             log(`Starting a new worker`);
-            cluster.fork();
+            fork();
         })
 
     } else {

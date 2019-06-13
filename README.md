@@ -73,6 +73,7 @@ Power options you can use in `Power.load(main, options);`
 | locale | 'en' | moment locale
 | enableLog | false | Enable logging to file
 | logFileName | appDirectory + '/power.log' | Log filename
+| afterFork | () => {} | Callback after fork or re-fork
 
 ## Full Reference
 
@@ -107,6 +108,9 @@ Power options you can use in `load(main, options);`
 | mid | [] | Array of koa middleware
 | numWorkers | 2 | Number of workers
 | locale | 'en' | moment locale
+| enableLog | false | Enable logging to file
+| logFileName | appDirectory + '/power.log' | Log filename
+| afterFork | () => {} | Callback after fork or re-fork
 
 *Notice: this package uses [Colors](https://www.npmjs.com/package/colors) internally, which extends the String prototype.*
 
