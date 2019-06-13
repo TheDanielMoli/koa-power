@@ -47,7 +47,7 @@ let italy = str => {
 };
 
 // set italy's color to string prototype
-Object.defineProperty( String.prototype, 'italy', {
+Object.defineProperty(String.prototype, 'italy', {
     get: function () {
         return italy(this);
     }
@@ -83,7 +83,7 @@ let load = (worker, options) => {
 
     powerLog && fs.existsSync(powerPath) && (shouldLineBreak = true);
 
-    powerLog && (powerStream = fs.createWriteStream(powerPath, {flags:'a'}));
+    powerLog && (powerStream = fs.createWriteStream(powerPath, {flags: 'a'}));
 
     let numWorkers = config.numWorkers;
     let mid = config.mid;
@@ -112,23 +112,25 @@ let load = (worker, options) => {
         // wait for worker to be online and give it a name
         cluster.on('online', (worker) => {
             while (!workers[worker.process.pid]) {
-            let maybeName = names.allRandom();
-            maybeName.length < 10 && !workerNames.includes(maybeName) && (workers[worker.process.pid] = maybeName);
-        }
-        workerNames.push(workers[worker.process.pid]);
-        worker.send(workers[worker.process.pid]);
-        log(`Worker ${workers[worker.process.pid]} is online`.green)
-    });
+                let maybeName = names.allRandom();
+                maybeName.length < 10 && !workerNames.includes(maybeName) && (workers[worker.process.pid] = maybeName);
+            }
+            workerNames.push(workers[worker.process.pid]);
+            worker.send({name:workers[worker.process.pid]});
+            log(`Worker ${workers[worker.process.pid]} is online`.green)
+        });
         cluster.on('exit', (worker, exitCode) => {
             log(`Worker ${worker.process.id} exited with code ${exitCode}`);
-        log(`Starting a new worker`);
-        cluster.fork();
-    })
+            log(`Starting a new worker`);
+            cluster.fork();
+        })
 
     } else {
         // get process name from master
         process.on('message', (msg) => {
-            name(msg);
+            if (msg.name) {
+                name(msg.name);
+            }
         });
 
         // init koa app
